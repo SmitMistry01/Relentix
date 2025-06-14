@@ -17,14 +17,12 @@ const DashboardWrapper = ({ children }: { children: React.ReactNode }) => {
     }
   })
   return (
-    <div className="flex h-screen bg-gray-50">
+    <div className="flex min-h-screen w-full bg-gray-50 text-gray-900">
       {/* Sidebar */}
-      <div className="w-64 flex-shrink-0">
         <Sidebar />
-      </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col overflow-hidden">
+      <div className={` w-full flex flex-col overflow-hidden bg-gray-50 dark:bg-dark-bg ${isSidebarCollapsed ? "":"md:pl-64"}`}>
         <Navbar />
         <main className="flex-1 overflow-y-auto p-4 md:p-6">
           {children}
@@ -34,12 +32,5 @@ const DashboardWrapper = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-// const DashboardWrapper = ({children} : {children:React.ReactNode}) => {
-//   return(
-//     <StoreProvider>
-//       <DashboardLayout>{children}</DashboardLayout>
-//     </StoreProvider>
-//   )
-// }
 
 export default DashboardWrapper;
