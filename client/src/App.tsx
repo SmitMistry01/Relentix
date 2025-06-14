@@ -10,7 +10,7 @@ function App() {
         <Route path="/" element={
           <DashboardWrapper>
             <h3 className='text-xl font-bold'>
-              This is the Dashboard
+              This is the Dashboard Layout
             </h3>
           </DashboardWrapper>
         } />
