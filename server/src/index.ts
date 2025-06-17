@@ -19,6 +19,8 @@ app.get("/",(req,res) => {
     res.send("This is home route");
 });
 
+app.use("/projects",projectRoutes);
+
 const port = process.env.PORT || 3000;
 app.listen(port,() => {
     console.log(`Server running on port ${port}`);
