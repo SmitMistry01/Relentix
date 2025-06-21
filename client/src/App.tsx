@@ -1,7 +1,7 @@
 import './App.css'
 import DashboardWrapper from './app/DashboardWrapper'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Settings from './app/components/Settings';
+import Settings from './components/Settings';
 
 function App() {
   return (

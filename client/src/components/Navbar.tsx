@@ -1,11 +1,10 @@
 import { Menu, Moon, Search, Settings, Sun } from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '../redux';
+import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector} from '../app/redux';
 import { setIsDarkMode, setIsSidebarCollapsed } from '../state';
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
-  const location = useLocation();
   const isSidebarCollapsed = useAppSelector((state) => state.global.isSidebarCollapsed);
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
 

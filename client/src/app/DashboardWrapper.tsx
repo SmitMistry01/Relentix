@@ -1,7 +1,7 @@
 'use client'
 
-import Sidebar from "./components/Sidebar";
-import Navbar from "./components/Navbar";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
 import { useAppSelector } from "./redux";
 import { useEffect } from "react";
 

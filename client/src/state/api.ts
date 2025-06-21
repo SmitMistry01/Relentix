@@ -1,9 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import {
-  createProject,
-  getProjects,
-} from "./../../../server/src/controllers/projectController";
-import { getTasks } from './../../../server/src/controllers/taskController';
+
 
 export interface Project {
   id: number;
@@ -62,7 +58,7 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL }),
   reducerPath: "api",
 
-  tagTypes: ["Projects"],
+  tagTypes: ["Projects", "Tasks"],
   endpoints: (build) => ({
     getProjects: build.query<Project[], void>({
       query: () => "projects",
@@ -77,11 +73,39 @@ export const api = createApi({
       }),
       invalidatesTags: ["Projects"],
     }),
-     getTasks: build.query<Task[], {projectId:number}>({
-      query: () => "projects",
-      providesTags: ["Projects"],
+    getTasks: build.query<Task[], { projectId: number }>({
+      query: ({ projectId }) => `tasks?projectId=${projectId}`,
+      providesTags: (result) =>
+        result
+          ? result.map(({ id }) => ({ type: "Tasks" as const, id }))
+          : [{ type: "Tasks" as const }],
+    }),
+    createTask: build.mutation<Task[], Partial<Task>>({
+      query: (task) => ({
+        url: "task",
+        method: "post",
+        body: task,
+      }),
+      invalidatesTags: ["Tasks"],
+    }),
+
+    updateTaskStatus: build.mutation<Task, { taskId: number; status: string }>({
+      query: ({ taskId, status }) => ({
+        url: `tasks/${taskId}/status`,
+        method: "PATCH",
+        body: { status },
+      }),
+      invalidatesTags: (_result, _error, { taskId }) => [
+        { type: "Tasks", id: taskId },
+      ],
     }),
   }),
 });
 
-export const { useGetProjectsQuery, useCreateProjectMutation } = api;
+export const {
+  useGetProjectsQuery,
+  useCreateProjectMutation,
+  useGetTasksQuery,
+  useCreateTaskMutation,
+  useUpdateTaskStatusMutation,
+} = api;
