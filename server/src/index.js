@@ -25,6 +25,8 @@ app.get("/", (req, res) => {
 });
 app.use("/projects", projectRoutes_1.default);
 app.use("/tasks", taskRoutes_1.default);
+// const __dirname = path.resolve();
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
