@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import ProjectHeader from "./ProjectHeader";
+import Board from "./BoardView";
 
 const Project = () => {
   const { projectId } = useParams<{ projectId: string }>(); 
@@ -11,6 +12,7 @@ const Project = () => {
   return (
     <div>
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === "Board" && (<Board projectId={projectId ?? ""} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />)}
     </div>
   );
 };
