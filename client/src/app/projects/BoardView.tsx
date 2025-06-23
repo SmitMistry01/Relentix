@@ -175,9 +175,10 @@ const Task = ({ task }: TaskProps) => {
           width={400}
           height={200}
           className="h-auto w-full rounded-t-md"
+          style={{ pointerEvents: "none" }}
         />
       )}
-     <div className="p-4 md:p-6">
+      <div className="p-4 md:p-6">
         <div className="flex items-start justify-between">
           <div className="flex flex-1 flex-wrap items-center gap-2">
             {task.priority && <PriorityTag priority={task.priority} />}
@@ -206,7 +207,7 @@ const Task = ({ task }: TaskProps) => {
             </div>
           )}
         </div>
-         <div className="text-xs text-gray-500 dark:text-neutral-500">
+        <div className="text-xs text-gray-500 dark:text-neutral-500">
           {formattedStartDate && <span>{formattedStartDate} - </span>}
           {formattedDueDate && <span>{formattedDueDate}</span>}
         </div>
@@ -215,13 +216,13 @@ const Task = ({ task }: TaskProps) => {
         </p>
         <div className="mt-4 border-t border-gray-200 dark:border-stroke-dark" />
 
-{/* Users */}
+        {/* Users */}
         <div className="mt-3 flex items-center justify-between">
           <div className="flex -space-x-[6px] overflow-hidden">
             {task.assignee && (
               <img
                 key={task.assignee.userId}
-                src={`${task.assignee.profilePictureUrl!}`}
+                src="./p1.jpeg"
                 alt={task.assignee.username}
                 width={30}
                 height={30}
@@ -239,7 +240,7 @@ const Task = ({ task }: TaskProps) => {
               />
             )}
           </div>
-           <div className="flex items-center text-gray-500 dark:text-neutral-500">
+          <div className="flex items-center text-gray-500 dark:text-neutral-500">
             <MessageSquareMore size={20} />
             <span className="ml-1 text-sm dark:text-neutral-400">
               {numberOfComments}
