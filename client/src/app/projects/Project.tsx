@@ -5,21 +5,22 @@ import Board from "./BoardView";
 import List from "./ListView";
 import Timeline from "./TimelineView";
 import Table from "./TableView";
+import ModalNewTask from "../../components/ModalNewTask";
 
 const Project = () => {
   const { projectId } = useParams<{ projectId: string }>(); 
 
   const [activeTab, setActiveTab] = useState("Board");
-  const [isModelNewTaskOpen, setIsModelNewTaskOpen] = useState(false);
+  const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
 
   return (
     <div>
-      {/* <ModelNewTask isOpen = {isOpen} ></ModelNewTask> */}
+      <ModalNewTask isOpen = {isModalNewTaskOpen} onClose = {() => setIsModalNewTaskOpen(false)}></ModalNewTask>
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === "Board" && (<Board projectId={projectId ?? ""} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />)}
-      {activeTab === "List" && (<List setIsModalNewTaskOpen={setIsModelNewTaskOpen} projectId = {projectId ?? ""} />)}
-      {activeTab === "Timeline" && (<Timeline setIsModalNewTaskOpen={setIsModelNewTaskOpen} projectId = {projectId ?? ""} />)}
-      {activeTab === "Table" && (<Table setIsModalNewTaskOpen={setIsModelNewTaskOpen} projectId = {projectId ?? ""} />)}
+      {activeTab === "Board" && (<Board projectId={projectId ?? ""} setIsModalNewTaskOpen={setIsModalNewTaskOpen} />)}
+      {activeTab === "List" && (<List setIsModalNewTaskOpen={setIsModalNewTaskOpen} projectId = {projectId ?? ""} />)}
+      {activeTab === "Timeline" && (<Timeline setIsModalNewTaskOpen={setIsModalNewTaskOpen} projectId = {projectId ?? ""} />)}
+      {activeTab === "Table" && (<Table setIsModalNewTaskOpen={setIsModalNewTaskOpen} projectId = {projectId ?? ""} />)}
     </div>
   );
 };
