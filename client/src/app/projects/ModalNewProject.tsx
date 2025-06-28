@@ -1,20 +1,33 @@
 import { useState } from "react";
 import { useCreateProjectMutation } from "../../state/api";
 import Modal from "../../components/Modal";
+import { useNavigate } from "react-router-dom";
 import { formatISO } from "date-fns";
+
 type Props = {
   isOpen: boolean;
   onClose: () => void;
 };
 
 const ModalNewProject = ({ isOpen, onClose }: Props) => {
+  const navigate = useNavigate();
   const [createProject, { isLoading }] = useCreateProjectMutation();
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
 
-const handleSubmit = async () => {
+  const handleClose = () => {
+    // Reset all fields
+    setProjectName("");
+    setDescription("");
+    setStartDate("");
+    setEndDate("");
+
+    // Call the parent close function
+    onClose();
+  };
+  const handleSubmit = async () => {
     if (!projectName || !startDate || !endDate) return;
 
     const formattedStartDate = formatISO(new Date(startDate), {
@@ -24,12 +37,14 @@ const handleSubmit = async () => {
       representation: "complete",
     });
 
-    await createProject({
+    const result = await createProject({
       name: projectName,
       description,
       startDate: formattedStartDate,
       endDate: formattedEndDate,
     });
+
+    navigate(`/projects/${result?.data?.id}`);
   };
 
   const isFormValid = () => {
@@ -39,7 +54,7 @@ const handleSubmit = async () => {
     "w-full rounded border border-gray-300 p-2 shadow-sm dark:border-dark-tertiary dark:bg-dark-tertiary dark:text-white dark:focus:outline-none";
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} name="Create New Project">
+    <Modal isOpen={isOpen} onClose={handleClose} name="Create New Project">
       <form
         className="mt-4 space-y-6"
         onSubmit={(e) => {

@@ -7,13 +7,22 @@ export interface Project {
   endDate?: string;
 }
 
-export type Priority = "Urgent" | "High" | "Medium" | "Low" | "Backlog";
 
-export type Status =
-  | "To Do"
-  | "Work In Progress"
-  | "Under Review"
-  | "Completed";
+export enum Status {
+  ToDo = "To Do",
+  WorkInProgress = "Work In Progress",
+  UnderReview = "Under Review",
+  Completed = "Completed",
+}
+
+export enum Priority {
+  Urgent = "Urgent",
+  High = "High",
+  Medium = "Medium",
+  Low = "Low",
+  Backlog = "Backlog",
+}
+
 
 export interface User {
   userId?: number;
@@ -66,7 +75,7 @@ export const api = createApi({
     createProject: build.mutation<Project, Partial<Project>>({
       query: (project) => ({
         url: "projects",
-        method: "post",
+        method: "POST",
         body: project,
       }),
       invalidatesTags: ["Projects"],
@@ -80,8 +89,8 @@ export const api = createApi({
     }),
     createTask: build.mutation<Task[], Partial<Task>>({
       query: (task) => ({
-        url: "task",
-        method: "post",
+        url: "/tasks",
+        method: "POST",
         body: task,
       }),
       invalidatesTags: ["Tasks"],
