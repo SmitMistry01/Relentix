@@ -14,6 +14,7 @@ const Project = () => {
 
   return (
     <div>
+      {/* <ModelNewTask isOpen = {isOpen} ></ModelNewTask> */}
       <ProjectHeader activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === "Board" && (<Board projectId={projectId ?? ""} setIsModalNewTaskOpen={setIsModelNewTaskOpen} />)}
       {activeTab === "List" && (<List setIsModalNewTaskOpen={setIsModelNewTaskOpen} projectId = {projectId ?? ""} />)}

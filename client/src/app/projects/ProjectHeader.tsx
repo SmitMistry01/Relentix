@@ -9,6 +9,7 @@ import {
   Share2,
   PlusSquare
 } from "lucide-react";
+import ModalNewProject from "./ModalNewProject";
 type Props = {
   activeTab:string;
   setActiveTab:(tabName:string) => void;
