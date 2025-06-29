@@ -14,9 +14,6 @@ const statusColor: Record<string, string> = {
 };
 
 const TaskCard = ({ task }: TaskProps) => {
-  const formattedStartDate = task.startDate
-    ? format(new Date(task.startDate), "P")
-    : "Not set";
   const formattedDueDate = task.dueDate
     ? format(new Date(task.dueDate), "P")
     : "Not set";

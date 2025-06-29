@@ -61,6 +61,12 @@ export interface Task {
   attachments?: Attachment[];
 }
 
+export interface SearchResults {
+  tasks?:Task[],
+  users?:User[],
+  projects?:Project[]
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL }),
   reducerPath: "api",
@@ -106,6 +112,10 @@ export const api = createApi({
         { type: "Tasks", id: taskId },
       ],
     }),
+
+    search:build.query<SearchResults,string>({
+      query : (query) => `search?query=${query}`
+    })
   }),
 });
 
@@ -115,4 +125,5 @@ export const {
   useGetTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskStatusMutation,
+  useSearchQuery
 } = api;
