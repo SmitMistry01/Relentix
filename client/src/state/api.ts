@@ -61,6 +61,13 @@ export interface Task {
   attachments?: Attachment[];
 }
 
+export interface Team {
+  teamId: number;
+  teamName: string;
+  productOwnerUserId?: number;
+  projectManagerUserId?: number;
+}
+
 export interface SearchResults {
   tasks?:Task[],
   users?:User[],
@@ -71,7 +78,9 @@ export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL }),
   reducerPath: "api",
 
-  tagTypes: ["Projects", "Tasks"],
+
+
+  tagTypes: ["Projects", "Tasks", "Users", "Teams"],
   endpoints: (build) => ({
     getProjects: build.query<Project[], void>({
       query: () => "projects",
@@ -115,7 +124,18 @@ export const api = createApi({
 
     search:build.query<SearchResults,string>({
       query : (query) => `search?query=${query}`
-    })
+    }),
+
+    getUsers:build.query<User[],void>({
+      query:() => "users",
+      providesTags:["Users"]
+    }),
+
+    getTeams: build.query<Team[], void>({
+      query: () => "teams",
+      providesTags: ["Teams"],
+    }),
+
   }),
 });
 
@@ -125,5 +145,7 @@ export const {
   useGetTasksQuery,
   useCreateTaskMutation,
   useUpdateTaskStatusMutation,
-  useSearchQuery
+  useSearchQuery,
+  useGetUsersQuery,
+  useGetTeamsQuery
 } = api;
