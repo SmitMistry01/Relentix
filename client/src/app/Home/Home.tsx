@@ -1,3 +1,4 @@
+import { BarChart } from "lucide-react";
 import Header from "../../components/Header";
 import {
   Priority,
@@ -101,7 +102,7 @@ const Home = () => {
             Task Priority Distribution
           </h3>
           <ResponsiveContainer>
-            <BarChart data = {taskDistribution}>
+            <BarChart
                 
         </ResponsiveContainer>
         </div>
