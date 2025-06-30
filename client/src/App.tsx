@@ -7,13 +7,14 @@ import Timeline from './app/Timeline/Timeline';
 import Search from './app/Search/Search';
 import Users from './app/Users/Users';
 import Teams from './app/Teams/Teams';
+import Home from './app/Home/Home';
 
 function App() {
   return (
     <BrowserRouter>
       <DashboardWrapper> 
         <Routes>
-          <Route path="/" element={<div className='text-xl font-bold'>Welcome to Dashboard</div>} />
+          <Route path="/" element={<Home />}/>
           <Route path="/settings" element={<Settings />} />
           <Route path="/search" element={<Search />} />
           <Route path="/teams" element={<Teams />} />
