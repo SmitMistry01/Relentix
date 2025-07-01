@@ -8,7 +8,7 @@ import Search from './app/Search/Search';
 import Users from './app/Users/Users';
 import Teams from './app/Teams/Teams';
 import Home from './app/Home/Home';
-import Priority from './app/Priority/Priority';
+import PriorityPage from './app/Priority/Priority';
 
 function App() {
   return (
@@ -22,7 +22,12 @@ function App() {
           <Route path="/timeline" element={<Timeline />} />
           <Route path="/users" element={<Users />} />
           <Route path="/projects/:projectId" element={<Project />} />
-          <Route path="/priority/:priority" element={<Priority />} />
+          <Route
+            path="/priority/:priority"
+            element={
+              <PriorityPage />
+            }
+          />
         </Routes>
       </DashboardWrapper>
     </BrowserRouter>
