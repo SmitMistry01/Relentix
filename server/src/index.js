@@ -38,6 +38,9 @@ app.use("/tasks", taskRoutes_1.default);
 app.use("/search", searchRoutes_1.default);
 app.use("/users", userRoutes_1.default);
 app.use("/teams", teamRoutes_1.default);
+app.get("/", (req, res) => {
+    res.send("This is the home route");
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
