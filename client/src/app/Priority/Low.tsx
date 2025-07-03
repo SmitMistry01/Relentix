@@ -1,9 +1,7 @@
-import { Priority } from "../../state/api"
-import PriorityPage from "./Priority"
+import { Navigate } from "react-router-dom";
 
-const High = () => {
-    return(
-        <PriorityPage priority = {Priority.Low} />
-    )
-}
-export default High;
+const Low = () => {
+  return <Navigate to="/priority/low" replace />;
+};
+
+export default Low;

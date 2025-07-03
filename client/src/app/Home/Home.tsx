@@ -141,7 +141,7 @@ const Home = () => {
           <ResponsiveContainer width="100%" height={300}>
             <PieChart data={projectStatus}>
               <Pie dataKey = "count" data = {projectStatus} fill = "#82ca9d" label>
-                {projectStatus.map((entry, index) => (
+                {projectStatus.map((_, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
