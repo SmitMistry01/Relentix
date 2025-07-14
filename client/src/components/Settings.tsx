@@ -2,8 +2,8 @@ import Header from "./Header";
 
 const Settings = () => {
   const userSettings = {
-    username: "johndoe",
-    email: "john.doe@example.com",
+    username: "smitmistry",
+    email: "smit.mistry@example.com",
     teamName: "Development Team",
     roleName: "Developer",
   };
