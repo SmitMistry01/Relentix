@@ -11,7 +11,7 @@ const UserCard = ({ user }: Props) => {
       <div className="h-12 w-12 overflow-hidden rounded-full bg-gray-200">
         {user.profilePictureUrl ? (
           <img
-            src={user.profilePictureUrl}
+            src={`https://relentix-s3-images.s3.us-east-1.amazonaws.com/${user.profilePictureUrl}`}
             alt="profile picture"
             className="h-full w-full object-cover"
           />

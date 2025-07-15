@@ -43,7 +43,7 @@ const TaskCard = ({ task }: TaskProps) => {
       {task.attachments && task.attachments?.length > 0 && (
         <div className="mb-4">
           <img
-            src={`/${task.attachments[0].fileURL}`}
+            src={`https://relentix-s3-images.s3.us-east-1.amazonaws.com/${task.attachments[0].fileURL}`}
             alt={task.attachments[0].fileName}
             className="w-full rounded-md object-cover max-h-52"
           />
@@ -107,7 +107,7 @@ const TaskCard = ({ task }: TaskProps) => {
         {task.assignee && (
           <div className="flex items-center gap-2 text-sm">
             <img
-              src={task.assignee.profilePictureUrl!}
+              src={`https://relentix-s3-images.s3.us-east-1.amazonaws.com/${task.assignee.profilePictureUrl!}`}
               alt={task.assignee.username}
               className="h-7 w-7 rounded-full object-cover"
             />
@@ -117,7 +117,7 @@ const TaskCard = ({ task }: TaskProps) => {
         {task.author && (
           <div className="flex items-center gap-2 text-sm">
             <img
-              src={task.author.profilePictureUrl!}
+              src={`https://relentix-s3-images.s3.us-east-1.amazonaws.com/${task.author.profilePictureUrl!}`}
               alt={task.author.username}
               className="h-7 w-7 rounded-full object-cover"
             />
