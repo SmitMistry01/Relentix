@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { useGetAuthUserQuery } from '@/state/api';
 export var Status;
 (function (Status) {
     Status["ToDo"] = "To Do";
@@ -17,6 +18,7 @@ export var Priority;
 export const api = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL }),
     reducerPath: "api",
+
     tagTypes: ["Projects", "Tasks", "Users", "Teams"],
     endpoints: (build) => ({
         getProjects: build.query({
@@ -75,4 +77,4 @@ export const api = createApi({
         }),
     }),
 });
-export const { useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery } = api;
+export const { useGetProjectsQuery, useCreateProjectMutation, useGetTasksQuery, useCreateTaskMutation, useUpdateTaskStatusMutation, useSearchQuery, useGetUsersQuery, useGetTeamsQuery, useGetTasksByUserQuery, useGetAuthUserQuery, } = api;
