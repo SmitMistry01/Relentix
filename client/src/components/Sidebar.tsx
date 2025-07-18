@@ -162,7 +162,7 @@ const Sidebar = () => {
               className="h-9 w-9 rounded-full object-cover"
             />
           ) : (
-            <User className="h-6 w-6 text-gray-800 dark:text-white" />
+            null
           )}
           <span className="text-sm font-medium text-gray-800 dark:text-white">
             {currentUserDetails?.username}
