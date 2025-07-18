@@ -69,15 +69,20 @@ const PriorityPage = () => {
   const [view, setView] = useState("List");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
    const { data: currentUser } = useGetAuthUserQuery({});
-  const userId = currentUser?.userDetails?.userId ?? null;
-  
+
+  const userId = currentUser?.userDetails?.userId ?? 3;
+
   const {
     data: tasks,
     isLoading,
     isError: isTaskError,
   } = useGetTasksByUserQuery(userId || 0, {
-    skip: userId === null,
+    skip: !userId,
   });
+
+  console.log("Current User:", currentUser);
+console.log("User ID:", userId);
+console.log("Fetched Tasks:", tasks);
 
   const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   const filteredTasks = priority
@@ -85,7 +90,7 @@ const PriorityPage = () => {
         (task: Task) => task.priority?.toLowerCase() === priority.toLowerCase()
       )
     : [];
-  console.log("priority prop:", priority);
+  console.log("priority prop:", filteredTasks);
 
   if (isTaskError || !tasks) return <div>Error fetching tasks</div>;
   return (

@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { useGetAuthUserQuery } from '@/state/api';
+import { fetchAuthSession, getCurrentUser } from "aws-amplify/auth";
+
 export var Status;
 (function (Status) {
     Status["ToDo"] = "To Do";
@@ -16,11 +17,35 @@ export var Priority;
     Priority["Backlog"] = "Backlog";
 })(Priority || (Priority = {}));
 export const api = createApi({
-    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL }),
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_API_URL,prepareHeaders: async (headers) => {
+      const session = await fetchAuthSession();
+      const { accessToken } = session.tokens ?? {};
+      if (accessToken) {
+        headers.set("Authorization", `Bearer ${accessToken}`);
+      }
+      return headers;
+    }, }),
     reducerPath: "api",
 
     tagTypes: ["Projects", "Tasks", "Users", "Teams"],
     endpoints: (build) => ({
+        getAuthUser: build.query({
+      queryFn: async (_, _queryApi, _extraoptions, fetchWithBQ) => {
+        try {
+          const user = await getCurrentUser();
+          const session = await fetchAuthSession();
+          if (!session) throw new Error("No session found");
+          const { userSub } = session;
+
+          const userDetailsResponse = await fetchWithBQ(`users/${userSub}`);
+          const userDetails = userDetailsResponse.data;
+
+          return { data: { user, userSub, userDetails } };
+        } catch (error) {
+          return { error: error.message || "Could not fetch user data" };
+        }
+      },
+    }),
         getProjects: build.query({
             query: () => "projects",
             providesTags: ["Projects"],
