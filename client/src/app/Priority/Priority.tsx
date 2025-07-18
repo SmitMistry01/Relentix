@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { Task } from "../../state/api";
-import { useGetTasksByUserQuery } from "../../state/api";
+import { useGetAuthUserQuery, useGetTasksByUserQuery } from "../../state/api";
 import { useAppSelector } from "../redux";
 import ModalNewTask from "../../components/ModalNewTask";
 import Header from "../../components/Header";
@@ -68,7 +68,9 @@ const PriorityPage = () => {
   const { priority } = useParams<{ priority: string }>();
   const [view, setView] = useState("List");
   const [isModalNewTaskOpen, setIsModalNewTaskOpen] = useState(false);
-  const userId = 1;
+   const { data: currentUser } = useGetAuthUserQuery({});
+  const userId = currentUser?.userDetails?.userId ?? null;
+  
   const {
     data: tasks,
     isLoading,
