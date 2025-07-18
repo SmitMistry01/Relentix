@@ -5,7 +5,6 @@ import "@aws-amplify/ui-react/styles.css";
 
 Amplify.configure(awsExports as any);
 
-
 const formFields = {
   signUp: {
     username: {
@@ -15,7 +14,7 @@ const formFields = {
       inputProps: { required: true },
     },
     email: {
-      order: 1,
+      order: 2,
       placeholder: "Enter your email address",
       label: "Email",
       inputProps: { type: "email", required: true },
@@ -34,12 +33,39 @@ const formFields = {
     },
   },
 };
+
 const AuthProvider = ({ children }: any) => {
   return (
-    <div>
-      <Authenticator formFields={formFields}>{({user} : any) => 
-      user ? (<div>{children}</div>) : (<div>Please sign in below:</div>)
-        }</Authenticator>
+    <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <Authenticator
+        formFields={formFields}
+        hideSignUp={false}
+        components={{
+          Header() {
+            return (
+              <div className="text-center mb-4">
+                <h1 className="text-4xl font-extrabold text-blue-600">Relentix</h1>
+                <p className="text-gray-500 text-sm mt-1">Sign in to access your workspace</p>
+              </div>
+            );
+          },
+          Footer() {
+            return (
+              <div className="text-center mt-4 text-sm text-gray-400">
+                © {new Date().getFullYear()} Relentix. All rights reserved.
+              </div>
+            );
+          },
+        }}
+      >
+        {({ user }: any) =>
+          user ? (
+            <div className="w-full">{children}</div>
+          ) : (
+            <div className="text-center text-lg">Please sign in below</div>
+          )
+        }
+      </Authenticator>
     </div>
   );
 };

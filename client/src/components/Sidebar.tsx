@@ -36,7 +36,7 @@ const Sidebar = () => {
   const { data: currentUser } = useGetAuthUserQuery({});
 
   if (!currentUser) return null;
-  const currentUserDetails = currentUser?.userDetails;
+
 
   const sidebarClassNames = `fixed flex flex-col h-[100%] justify-between shadow-xl
     transition-all duration-300 h-full z-40 dark:bg-black overflow-y-auto bg-white
@@ -153,23 +153,7 @@ const Sidebar = () => {
           </>
         )}
       </div>
-      <div className="z-10 mt-auto flex w-full items-center justify-between gap-4 bg-white px-6 py-4 dark:bg-black">
-        <div className="flex items-center gap-3">
-          {!!currentUserDetails?.profilePictureUrl ? (
-            <img
-              src={`https://relentix-s3-images.s3.us-east-1.amazonaws.com/${currentUserDetails?.profilePictureUrl}`}
-              alt={currentUserDetails?.username || "User"}
-              className="h-9 w-9 rounded-full object-cover"
-            />
-          ) : (
-            null
-          )}
-          <span className="text-sm font-medium text-gray-800 dark:text-white">
-            {currentUserDetails?.username}
-          </span>
-        </div>
-        
-      </div>
+      
     </div>
   );
 };
